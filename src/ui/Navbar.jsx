@@ -22,32 +22,34 @@ export default function Navbar() {
     setOpen(false);
   };
   return (
-    <NavLink className="flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-sm  [&>*]:font-thin [&>*]:w-28">
-      <Link to="/" className="">
-        <HomeOutlined />
-        <span>Home</span>
-      </Link>
-      &nbsp;
-      <Link to="/discover" className="">
-        <SearchOutlined />
-        <span>Discover</span>
-      </Link>
-      <Link to="/blog" className="">
-        <BookOutlined />
-        <span>Blog</span>
-      </Link>
-      <Link to="/audio" className="">
-        <SpotifyOutlined />
-        <span>Audio</span>
-      </Link>
-      <Link className="" onClick={onOpen}>
-        <MenuFoldOutlined />
-        <span>Menu</span>
-      </Link>
-      <Drawer onClose={onClose} open={open} className="">
-        <MenuContent />
-      </Drawer>
-    </NavLink>
+    <div className="fixed bottom-0 left-0 right-0 md:top-[4rem]  md:border-2 h-max ">
+      <NavLink className=" top-0 bg-white flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-sm  [&>*]:font-thin [&>*]:w-28">
+        <Link to="/" className="">
+          <HomeOutlined />
+          <span>Home</span>
+        </Link>
+        &nbsp;
+        <Link to="/discover" className="">
+          <SearchOutlined />
+          <span>Discover</span>
+        </Link>
+        <Link to="/blog" className="">
+          <BookOutlined />
+          <span>Blog</span>
+        </Link>
+        <Link to="/audio" className="">
+          <SpotifyOutlined />
+          <span>Audio</span>
+        </Link>
+        <Link className="" onClick={onOpen}>
+          <MenuFoldOutlined />
+          <span>Menu</span>
+        </Link>
+        <Drawer onClose={onClose} open={open} className="">
+          <MenuContent />
+        </Drawer>
+      </NavLink>
+    </div>
   );
 }
 
