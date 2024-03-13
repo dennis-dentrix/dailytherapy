@@ -1,5 +1,6 @@
 import { Carousel } from "antd";
 import img1 from "../assets/img1.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function ScrollableVideo() {
   return (
@@ -11,31 +12,28 @@ export default function ScrollableVideo() {
       <VideoCard />
       <VideoCard />
       <VideoCard />
-
     </section>
   );
 }
 
-
 function VideoCard() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex gap-2 items-center justify-between">
-        <div className="w-[20rem] "> 
-          <img
-            src={img1}
-            alt="image 1"
-            className=" rounded-md shadow-lg"
-          />
-          <Carousel autoplay />
+    <div
+      className="flex gap-2 items-center justify-between"
+      onClick={() => navigate("/exercise/1")}
+    >
+      <div className="w-[20rem] ">
+        <img src={img1} alt="image 1" className=" rounded-md shadow-lg" />
+        <Carousel autoplay />
 
-          <div className="px-2 pt-5">
-            <p className="font-medium text-xl " > 
-              The madfit jump rope 
-            </p>
+        <div className="px-2 pt-5">
+          <p className="font-medium text-xl ">The madfit jump rope</p>
 
-            <p>Madfit</p>
-          </div>
+          <p>Madfit</p>
         </div>
       </div>
-  )
+    </div>
+  );
 }

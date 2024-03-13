@@ -9,7 +9,10 @@ export default function Applayout() {
         <Header />
         <Navbar />
       </div>
-      <Outlet />
+
+      <div className="md:mt-[7.5rem]">
+        <Outlet />
+      </div>
     </div>
   );
 }

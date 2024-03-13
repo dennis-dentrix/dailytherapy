@@ -17,6 +17,7 @@ import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 import ForgotPassword from "./auth/ForgotPassword";
 import { Mailsent } from "./auth/MailSent";
+import VideoView from "./components/VideoView";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route element={<Applayout />}>
           <Route index element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/exercise/1" element={<VideoView />} />{" "}
           <Route element={<Discover />}>
             <Route index element={<Navigate replace to="/discover" />} />
             <Route path="/discover" element={<Articles />} />
