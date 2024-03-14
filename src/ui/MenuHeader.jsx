@@ -7,13 +7,13 @@ export default function MenuHeader() {
 
   return (
     <header>
-      <div className="border-b pb-2">
-        <div className=" flex container justify-between items-center mt-5 ">
-          <div className="flex items-center ">
-            <X onClick={() => navigate(-1)} className="text-3xl" />
+      <div className="border-b py-2 px-3">
+        <div className=" flex container justify-between items-center  ">
+          <div className="flex items-center gap-4 ">
+            <X onClick={() => navigate(-1)} className="text-4xl" />
             <Circle onClick={() => navigate("/home")} className="text-2xl" />
           </div>
-          <div className="flex gap-2 items-center *:text-2xl">
+          <div className="flex gap-4 items-bottom *:text-2xl">
             <Heart />
             <MessageFilled onClick={() => navigate("/therapybot")} />
           </div>

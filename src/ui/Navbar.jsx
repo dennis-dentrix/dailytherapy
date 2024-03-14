@@ -23,12 +23,11 @@ export default function Navbar() {
   };
   return (
     <div className="fixed bottom-0 left-0 right-0 lg:top-[3.5rem]  md:border-2 h-max ">
-      <NavLink className=" top-0 bg-white flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-sm  [&>*]:font-thin [&>*]:w-28">
-        <Link to="/" className="">
+      <NavLink className=" top-0 bg-white flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-lg  [&>*]:font-thin [&>*]:w-28">
+        <Link to="/home" className="">
           <HomeOutlined />
           <span>Home</span>
         </Link>
-        &nbsp;
         <Link to="/discover" className="">
           <SearchOutlined />
           <span>Discover</span>

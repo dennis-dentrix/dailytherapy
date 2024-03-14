@@ -27,16 +27,18 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/mailSent" element={<Mailsent />} />
+
         <Route element={<Applayout />}>
           <Route index element={<Navigate replace to="/home" />} />
           <Route path="/home" element={<Home />} />
           <Route path="/exercise/1" element={<VideoView />} />{" "}
-          <Route element={<Discover />}>
-            <Route index element={<Navigate replace to="/discover" />} />
-            <Route path="/discover" element={<Articles />} />
-          </Route>
           <Route path="/blog" element={<Blog />} />
           <Route path="/audio" element={<Audio />} />
+        </Route>
+
+        <Route element={<Discover />}>
+          <Route index element={<Navigate replace to="/discover" />} />
+          <Route path="/discover" element={<Articles />} />
         </Route>
 
         <Route element={<Menu />}>

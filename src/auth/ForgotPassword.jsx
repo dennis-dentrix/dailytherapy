@@ -18,8 +18,8 @@ export function ForgotForm() {
     navigate("/mailsent");
   };
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="p-8 bg-white shadow-lg">
+    <div className="flex min-h-screen items-center justify-center ">
+      <div className="p-8 bg-white">
         <h1 className="text-3xl font-semibold">Forgot password?</h1>
         <p className="mt-2 text-lg">Enter your email to reset password</p>
         <form className="mt-6">

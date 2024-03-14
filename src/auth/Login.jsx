@@ -12,8 +12,8 @@ export default function Login() {
 
 export function LoginForm() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div className="flex min-h-screen items-center justify-center ">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg">
         <h1 className="text-center text-3xl font-bold">My Daily Therapy</h1>
         <form className="mt-8 space-y-6">
           <div>
