@@ -26,13 +26,13 @@ const Navigation = () => {
   return (
     <nav className="flex justify-center items-center bg-gray-300 py-4 shadow-md [&>*]:text-gray-700 [&>*]:hover:text-gray-900">
       <div className="space-x-4 *:px-6 *:py-[1.2rem] ">
-        <NavLink to="/discover" className="">
+        <NavLink to="/discover/articles" className="">
           ARTICLES
         </NavLink>
-        <NavLink to="/videos" className="">
+        <NavLink to="/discover/videos" className="">
           VIDEOS
         </NavLink>
-        <NavLink to="/audio" className="">
+        <NavLink to="/discover/audio" className="">
           AUDIO
         </NavLink>
       </div>

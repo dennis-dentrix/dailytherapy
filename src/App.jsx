@@ -37,8 +37,10 @@ function App() {
         </Route>
 
         <Route element={<Discover />}>
-          <Route index element={<Navigate replace to="/discover" />} />
-          <Route path="/discover" element={<Articles />} />
+          <Route index element={<Navigate replace to="/discover/articles" />} />
+          <Route path="/discover/articles" element={<Articles />} />
+          <Route path="/discover/videos" element={<Articles />} />
+          <Route path="/discover/audio" element={<Articles />} />
         </Route>
 
         <Route element={<Menu />}>
