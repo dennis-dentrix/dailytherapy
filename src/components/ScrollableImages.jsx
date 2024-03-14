@@ -1,8 +1,9 @@
+import { LockFill } from "react-bootstrap-icons";
 import img1 from "../assets/img2.jpg";
 
 export default function HomeSection2() {
   return (
-    <section className=" mx-auto w-2/3 flex items-center gap-[3.5rem] py-4">
+    <section className=" flex items-center gap-[3.5rem] py-4 overflow-x-scroll md:overflow-hidden md:mx-auto md:w-[85%]">
       <ImageGroup />
       <ImageGroup />
       <ImageGroup />
@@ -13,8 +14,8 @@ export default function HomeSection2() {
 
 function ImageGroup() {
   return (
-    <div className="flex gap-2 items-center justify-between" >
-      <div className="w-[10rem]">
+    <div className="flex gap-2 items-center justify-between">
+      <div className="w-[8rem] md:w-[11rem]">
         <img
           src={img1}
           alt="image 1"
@@ -22,11 +23,15 @@ function ImageGroup() {
         />
 
         <div className="px-2 pt-5">
-          <p className="font-light text-xl line-clamp-2 ">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae
-          </p>
+          <div className="flex gap-1 items-center">
+            <LockFill className="bg-yellow-300 text-white p-1 w-14 font-bold" />
+            <p className="font-light text-base md:text-xl line-clamp-1 md:line-clamp-2 ">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Molestiae
+            </p>
+          </div>
 
-          <p>Introduction</p>
+          <p className="text-xs">Introduction</p>
         </div>
       </div>
     </div>

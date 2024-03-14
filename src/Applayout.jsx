@@ -4,13 +4,13 @@ import Navbar from "./ui/Navbar";
 
 export default function Applayout() {
   return (
-    <div className="relative overflow-x-hidden h-screen flex flex-col ">
-      <div className="md:fixed bg-white">
+    <div className=" overflow-x-hidden mb-20 lg:mb-3 flex flex-col ">
+      <div className="md:fixed bg-white z-10">
         <Header />
         <Navbar />
       </div>
 
-      <div className="md:mt-[7.5rem]">
+      <div className="mt-[2rem] md:mt-[8rem]">
         <Outlet />
       </div>
     </div>
