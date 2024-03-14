@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 export default function Profile() {
   return (
-    <main className="py-4 md:py-6 md:flex md:flex-col md:items-center">
+    <main className="py-4 md:py-6 md:flex md:flex-col md:items-center md:mt-20">
       <div className="border-b md:w-1/2 md:py-3">
         <div className="flex flex-col items-center gap-6 mb-6">
           <div className="flex flex-col items-center gap-3 text-3xl">
