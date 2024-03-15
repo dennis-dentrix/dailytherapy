@@ -25,6 +25,8 @@ import Terms from "./components/Terms";
 import BlogComponent from "./pages/BlogComponent";
 import Subscribe from "./pages/Subscribe";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import VideoResults from "./pages/VideoResults";
+import AudioResults from "./pages/AudioResults";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,13 +63,10 @@ function App() {
 
           {/* DISCOVER PAGE ROUTE */}
           <Route element={<Discover />}>
-            <Route
-              index
-              element={<Navigate replace to="/discover/articles" />}
-            />
+            {/* <Route index element={<Navigate replace to="/discover" />} /> */}
             <Route path="/discover/articles" element={<Articles />} />
-            <Route path="/discover/videos" element={<Articles />} />
-            <Route path="/discover/audio" element={<Articles />} />
+            <Route path="/discover/videos" element={<VideoResults />} />
+            <Route path="/discover/audio" element={<AudioResults />} />
           </Route>
 
           <Route element={<Menu />}>

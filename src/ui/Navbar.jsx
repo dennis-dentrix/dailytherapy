@@ -10,7 +10,7 @@ import {
   VideoCameraAddOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Drawer } from "antd";
 
 export default function Navbar() {
@@ -23,31 +23,67 @@ export default function Navbar() {
   };
   return (
     <div className="fixed bottom-0 left-0 right-0 lg:top-[3.5rem]  md:border-2 h-max ">
-      <NavLink className=" top-0 bg-white flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-lg  [&>*]:font-thin [&>*]:w-28">
-        <Link to="/home" className="">
+      <ul className=" top-0 bg-white flex items-center justify-center gap-6 py-4 [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:gap-1 [&>*]:text-lg  [&>*]:font-thin [&>*]:w-28">
+        <NavLink
+          to="/home"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 text-blue-300" : "translate-x-0"
+            }`
+          }
+        >
           <HomeOutlined />
           <span>Home</span>
-        </Link>
-        <Link to="/discover" className="">
+        </NavLink>
+        <NavLink
+          to="/discover/articles"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 text-blue-300" : "translate-x-0"
+            }`
+          }
+        >
           <SearchOutlined />
           <span>Discover</span>
-        </Link>
-        <Link to="/blog" className="">
+        </NavLink>
+        <NavLink
+          to="/blog"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 text-blue-300" : "translate-x-0"
+            }`
+          }
+        >
           <BookOutlined />
           <span>Blog</span>
-        </Link>
-        <Link to="/audio" className="">
+        </NavLink>
+        <NavLink
+          to="/audio"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 text-blue-300" : "translate-x-0"
+            }`
+          }
+        >
           <SpotifyOutlined />
           <span>Audio</span>
-        </Link>
-        <Link className="" onClick={onOpen}>
+        </NavLink>
+        <NavLink className="" onClick={onOpen}>
           <MenuFoldOutlined />
           <span>Menu</span>
-        </Link>
-        <Drawer onClose={onClose} open={open} className="">
+        </NavLink>
+        <Drawer
+          onClose={onClose}
+          open={open}
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 text-blue-300" : "translate-x-0"
+            }`
+          }
+        >
           <MenuContent />
         </Drawer>
-      </NavLink>
+      </ul>
     </div>
   );
 }
@@ -55,22 +91,22 @@ export default function Navbar() {
 const MenuContent = () => {
   return (
     <nav className="flex flex-col items-start gap-4 w-full [&>*]:border-b [&>*]:w-full [&>*]:py-2 [&>*]:gap-3 *:flex *:text-lg last:border-none">
-      <Link to="/profile">
+      <NavLink to="/profile">
         <UserOutlined />
         <span>Profile</span>
-      </Link>
-      <Link to="/videos">
+      </NavLink>
+      <NavLink to="/videos">
         <VideoCameraAddOutlined />
         <span>Videos</span>
-      </Link>
-      <Link to="/therapybot">
+      </NavLink>
+      <NavLink to="/therapybot">
         <MessageFilled />
         <span>AITherapy</span>
-      </Link>
-      <Link to="/seatch">
+      </NavLink>
+      <NavLink to="/seatch">
         <InfoCircleOutlined />
         <span>About</span>
-      </Link>
+      </NavLink>
     </nav>
   );
 };

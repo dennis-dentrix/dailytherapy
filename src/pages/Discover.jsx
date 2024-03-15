@@ -1,7 +1,7 @@
-import { SearchOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
-import Navbar from "../ui/Navbar";
+import { NavLink, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
+import Navbar from "../ui/Navbar";
+
 export default function Discover() {
   return (
     <main>
@@ -15,38 +15,50 @@ export default function Discover() {
           className="bg-transparent w-full py-1  text-gray-600 focus:outline-none"
         />
       </div>
-      <Navigation />
-      <SearchBody />
       <Navbar />
+      <Navigation />
+      <Outlet />
+      {/* <SearchResult /> */}
+      {/* <SearchBody /> */}
     </main>
   );
 }
 
 const Navigation = () => {
   return (
-    <nav className="flex justify-center items-center bg-gray-300 py-4 shadow-md [&>*]:text-gray-700 [&>*]:hover:text-gray-900">
-      <div className="space-x-4 *:px-6 *:py-[1.2rem] ">
-        <NavLink to="/discover/articles" className="">
+    <nav className="lg:mt-[5rem] flex justify-center items-center bg-gray-300 py-4 shadow-md [&>*]:text-gray-700 [&>*]:hover:text-gray-900">
+      <div className="space-x-4 *:px-6 *:py-[1.2rem] *:text-sm">
+        <NavLink
+          to="/discover/articles"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 bg-white" : "translate-x-0"
+            }`
+          }
+        >
           ARTICLES
         </NavLink>
-        <NavLink to="/discover/videos" className="">
+        <NavLink
+          to="/discover/videos"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 bg-white" : "translate-x-0"
+            }`
+          }
+        >
           VIDEOS
         </NavLink>
-        <NavLink to="/discover/audio" className="">
+        <NavLink
+          to="/discover/audio"
+          className={({ isActive }) =>
+            `text-gray-500 transition-all duration-300 ${
+              isActive ? " translate-x-2 bg-white" : "translate-x-0"
+            }`
+          }
+        >
           AUDIO
         </NavLink>
       </div>
     </nav>
-  );
-};
-
-const SearchBody = () => {
-  return (
-    <div className="flex items-center justify-center flex-col">
-      <div className="text-7xl py-5">
-        <SearchOutlined />
-      </div>
-      <p className="font-medium text-2xl">Perform a search</p>
-    </div>
   );
 };
