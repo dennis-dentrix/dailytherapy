@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuHeader from "../ui/MenuHeader";
 
 export default function Login() {
@@ -11,6 +11,11 @@ export default function Login() {
 }
 
 export function LoginForm() {
+  const navigate = useNavigate();
+  const onLogin = (e) => {
+    e.preventDafault();
+    navigate("/profile");
+  };
   return (
     <div className="flex min-h-screen items-center justify-center ">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg">
@@ -43,7 +48,10 @@ export function LoginForm() {
               type="password"
             />
           </div>
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full">
+          <button
+            onClick={onLogin}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full"
+          >
             LOG IN
           </button>
         </form>

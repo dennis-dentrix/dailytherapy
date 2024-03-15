@@ -1,5 +1,6 @@
 import { LockFill } from "react-bootstrap-icons";
 import img1 from "../assets/img3.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeSection3() {
   return (
@@ -12,8 +13,12 @@ export default function HomeSection3() {
 }
 
 function Collection() {
+  const navigate = useNavigate();
   return (
-    <div className="flex gap-2 items-center justify-between">
+    <div
+      className="flex gap-2 items-center justify-between"
+      onClick={() => navigate("/podcast/1")}
+    >
       <div className="w-[20rem] ">
         <img
           src={img1}

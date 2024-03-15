@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .active {
-    @layer @apply bg-white;
+  @layer @apply bg-white;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
 }
