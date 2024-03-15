@@ -21,7 +21,7 @@ export function Account() {
     <main>
       <MenuHeader />
 
-      <div className="md:flex md:h-screen bg-white">
+      <div className="md:flex justify-center md:h-screen bg-white">
         <AccountMenu />
 
         <Outlet />
@@ -38,11 +38,10 @@ function AccountMenu() {
         <Avatar style={{ fontSize: 30 }} />
         <span className="text-xl font-medium">denkyusya@gmail.com</span>
       </div>
-      <nav className="space-y-2 md:border py-4 px-3 flex flex-col *:py-3 *:px-2 *:gap-2 *:text-2xl md:text-base ">
+      <nav className="space-y-2 md:border py-4 px-3 flex flex-col *:py-3 *:px-2 *:gap-2 *:text-xl md:text-base ">
         <Link
           to="profile"
           className="flex items-center space-x-2 text-gray-700"
-          href="#"
         >
           <UserOutlined className="h-5 w-5" />
           My account{"\n              "}
@@ -50,43 +49,35 @@ function AccountMenu() {
         <Link
           to={"/profile/push"}
           className="flex items-center space-x-2 text-gray-700 border-b"
-          href="#"
         >
           <Bell className="h-5 w-5" />
           My push notifications{"\n              "}
         </Link>
-        <Link
-          className="flex items-center space-x-2 text-gray-700 border-b"
-          href="#"
-        >
+        <Link className="flex items-center space-x-2 text-gray-700 border-b">
           <DollarCircleFilled className="h-5 w-5" />
           Subscribe{"\n              "}
         </Link>
-        <Link className="flex items-center space-x-2 text-gray-700" href="#">
+        <Link className="flex items-center space-x-2 text-gray-700">
           <SendArrowUp className="h-5 w-5" />
           Contact us{"\n              "}
         </Link>
-        <Link className="flex items-center space-x-2 text-gray-700" href="#">
+        <Link className="flex items-center space-x-2 text-gray-700">
           <ShareFill className="h-5 w-5" />
           Share this App{"\n              "}
         </Link>
-        <Link
-          to="terms"
-          className="flex items-center space-x-2 text-gray-700"
-          href="#"
-        >
+        <Link to="terms" className="flex items-center space-x-2 text-gray-700">
           <FileEarmark className="h-5 w-5" />
           Terms & Conditions{"\n              "}
         </Link>
-        <Link className="flex items-center space-x-2 text-gray-700" href="#">
+        <Link className="flex items-center space-x-2 text-gray-700">
           <Lock className="h-5 w-5" />
           Privacy Policy{"\n              "}
         </Link>
-        <Link className="flex items-center space-x-2 text-gray-700" href="#">
+        <Link className="flex items-center space-x-2 text-gray-700">
           <SettingFilled className="h-5 w-5" />
           <AppSettings />
         </Link>
-        <Link className="flex items-center space-x-2 text-gray-700" href="#">
+        <Link className="flex items-center space-x-2 text-gray-700">
           <BoxArrowRight className="h-5 w-5" />
           Log out{"\n              "}
         </Link>
