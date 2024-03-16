@@ -26,13 +26,9 @@ export function SignupForm() {
 
   function onSubmitForm(data) {
     signUpAPI(data, {
-      onSuccess: (data) => {
-        console.log(data);
-        dispatch({
-          type: "signup",
-          payload: { user: data.data.user, token: data.token },
-        });
-        localStorage.setItem("email", data.email);
+      onSuccess: ({ data }) => {
+        console.log(data.user);
+
         reset();
         navigate("/home");
       },
