@@ -44,8 +44,6 @@ export async function signUp(data) {
 
     const data = await response.json();
 
-    console.log(response);
-
     if (!response.ok) {
       console.log(data);
       throw new Error("Something went wrong");
