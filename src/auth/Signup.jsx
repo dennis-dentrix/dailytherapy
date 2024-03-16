@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { useSignUp } from "../hooks/useSignUp";
+import { useNavigate } from "react-router";
+import { useAppState } from "../context/userContext";
 
 export default function Signup() {
   return (
@@ -18,11 +20,21 @@ export function SignupForm() {
   const [showPswd, setShowPswd] = useState(false);
   const { register, reset, handleSubmit } = useForm();
   const { signUpAPI, isLoading } = useSignUp();
+  const navigate = useNavigate();
+
+  const { dispatch } = useAppState();
 
   function onSubmitForm(data) {
     signUpAPI(data, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log(data);
+        dispatch({
+          type: "signup",
+          payload: { user: data.data.user, token: data.token },
+        });
+        localStorage.setItem("email", data.email);
         reset();
+        navigate("/home");
       },
     });
   }

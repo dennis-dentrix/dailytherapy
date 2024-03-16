@@ -1,35 +1,76 @@
-import * as React from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import { Avatar } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useUpdate } from "../hooks/useUpdate";
+import { useNavigate } from "react-router";
+import { useDeleteAcc } from "../hooks/UseDeleteAcc";
+import DeleteAccount from "../ui/DeleteAccount";
+import ResetDialog from "../ui/ResetPswdDialog";
+import { Spin } from "antd";
+import { useAppState } from "../context/userContext";
 
 export default function AccountContent() {
+  const { register, handleSubmit } = useForm();
+  const { updateAPI, isLoading } = useUpdate();
+  const navigate = useNavigate();
+  const { deleteApi, isDeleting } = useDeleteAcc();
+
+  const { user, token, dispatch } = useAppState();
+
+  function deleteAcc() {
+    deleteApi(null, {
+      onSuccess: () => {
+        navigate("/home");
+      },
+    });
+  }
+  function onUpdate(newData) {
+    const updateData = { ...newData, token: token };
+    updateAPI(updateData, {
+      onSuccess: ({ data }) => {
+        console.log(data);
+        dispatch({ type: "update", payload: data.user });
+        localStorage.setItem("name", newData.name);
+        navigate("/home");
+      },
+    });
+    console.log(newData);
+  }
+
   return (
     <main className="md:w-3/4 p-8">
       <h1 className="text-2xl font-semibold mb-6">My account</h1>
       <div className="bg-white p-8 rounded-md">
-        <div className="flex gap-4 items-center mb-6">
-          <Avatar />
-          <button className="text-blue-400">UPLOAD A PHOTO</button>
-        </div>
-        <form className="w-full md:grid md:grid-cols-2 gap-6">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="firstName">First name*</label>
+        <form className="w-full " onSubmit={handleSubmit(onUpdate)}>
+          <div className="flex gap-4 items-center mb-6">
+            <Avatar src={user.photo} />
             <input
-              type="text"
-              className="focus:outline-none px-2 py-4 border"
+              type="file"
+              className="text-blue-400 cursor-pointer"
+              placeholder="UPLOAD A PHOTO"
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="email">Email*</label>
-            <input
-              type="email"
-              className="focus:outline-none px-2 py-4 border"
-            />
+          <div className="md:grid md:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name">Full name*</label>
+              <input
+                type="text"
+                className="focus:outline-none px-2 py-3 border"
+                {...register("name")}
+                defaultValue={user?.name ?? ""}
+                disabled={user?.name ? true : false}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">Email*</label>
+              <input
+                type="email"
+                className="focus:outline-none px-2 py-3 border"
+                defaultValue={user.email}
+                disabled
+              />
+            </div>
           </div>
 
           <div className="col-span-2 flex flex-col items-start gap-4">
@@ -38,120 +79,23 @@ export default function AccountContent() {
               <ResetDialog />
             </button>
           </div>
-          <div className="col-span-2 flex flex-col items-start gap-4">
-            <p>Privacy</p>
-            <button className="hover:bg-gray-200 cursor-pointer py-3 px-2">
-              <DeleteAccount />
-            </button>
-          </div>
+
           <div className="col-span-2 flex justify-end">
-            <button className="text-white bg-blue-400 px-1 py-2 text-lg rounded-md border">
-              SAVE
+            <button
+              type="submit"
+              className="text-white bg-blue-400 px-1 py-2 text-lg rounded-md border"
+            >
+              {isLoading || isDeleting ? <Spin /> : "SAVE"}
             </button>
           </div>
         </form>
+        <div className="col-span-2 flex flex-col items-start gap-4">
+          <p>Privacy</p>
+          <button className="hover:bg-gray-200 cursor-pointer py-3 px-2">
+            <DeleteAccount onDelete={deleteAcc} />
+          </button>
+        </div>
       </div>
     </main>
-  );
-}
-
-export function ResetDialog() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <React.Fragment>
-      <div onClick={handleClickOpen} className="text-blue-500">
-        Reset Password
-      </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
-        }}
-      >
-        <DialogTitle className="flex justify-center">Edit password</DialogTitle>
-        <DialogContent>
-          <form action="">
-            <div className="flex flex-col gap-4">
-              <label htmlFor="curr_pswd">Current Password</label>
-              <input
-                type="text"
-                className="border px-2 py-3 rounded-md focus:outline-none w-[25vw]"
-              />
-            </div>
-            <div className="flex flex-col gap-4">
-              <label htmlFor="new_pswd">New Password</label>
-              <input
-                type="text"
-                className="border px-2 py-3 rounded-md focus:outline-none w-[25vw]"
-              />
-            </div>
-            <div className="flex flex-col gap-4">
-              <label htmlFor="confirm">Confirm</label>
-              <input
-                type="text"
-                className="border px-2 py-3 rounded-md focus:outline-none w-[25vw]"
-              />
-            </div>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <button onClick={handleClose}>Cancel</button>
-          <button type="submit">Confirm</button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-  );
-}
-
-function DeleteAccount() {
-  const [openDelete, setOpenDelete] = React.useState(false);
-
-  //   const handleClickOpen = () => {
-  //     setOpenDelete(true);
-  //   };
-
-  const handleClose = () => {
-    setOpenDelete(false);
-  };
-
-  return (
-    <React.Fragment>
-      <div onClick={() => setOpenDelete(false)} className="text-red-500">
-        Delete account
-      </div>
-      <Dialog open={openDelete} onClose={handleClose}>
-        <DialogTitle className="flex justify-center">
-          Account deletion
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You are about to delete your account. Are you sure you want to
-            proceed?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <button onClick={handleClose}>Cancel</button>
-          <button type="submit">Confirm</button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
   );
 }

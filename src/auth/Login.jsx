@@ -1,5 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import MenuHeader from "../ui/MenuHeader";
+import { useForm } from "react-hook-form";
+import { UseLogin } from "../hooks/useLogin";
+import { Spin } from "antd";
 
 export default function Login() {
   return (
@@ -11,16 +14,25 @@ export default function Login() {
 }
 
 export function LoginForm() {
+  const { register, handleSubmit, reset } = useForm();
+  const { loginApi, isLoading } = UseLogin();
   const navigate = useNavigate();
-  const onLogin = (e) => {
-    e.preventDafault();
-    navigate("/profile");
+
+  const onLogin = (data) => {
+    loginApi(data, {
+      onSuccess: () => {
+        localStorage.setItem("email", data.email);
+        reset();
+        navigate("/profile");
+      },
+    });
   };
   return (
     <div className="flex min-h-screen items-center justify-center ">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg">
         <h1 className="text-center text-3xl font-bold">My Daily Therapy</h1>
-        <form className="mt-8 space-y-6">
+
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onLogin)}>
           <div>
             <label
               className="block text-sm font-medium text-gray-700"
@@ -33,6 +45,7 @@ export function LoginForm() {
               id="email"
               placeholder="Email"
               type="email"
+              {...register("email", { required: "Enter your email" })}
             />
           </div>
           <div>
@@ -46,13 +59,14 @@ export function LoginForm() {
               className="mt-1 block w-full border focus:outline-none px-3 py-2 rounded-md "
               placeholder="Password"
               type="password"
+              {...register("password", { required: "Enter your password" })}
             />
           </div>
           <button
-            onClick={onLogin}
+            type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full"
           >
-            LOG IN
+            {isLoading ? <Spin /> : " LOG IN"}
           </button>
         </form>
 

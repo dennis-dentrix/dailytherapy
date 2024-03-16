@@ -27,6 +27,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import VideoResults from "./pages/VideoResults";
 import AudioResults from "./pages/AudioResults";
 import { Toaster } from "react-hot-toast";
+import Profile from "./pages/Profile";
+import { UserProvider } from "./context/userContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,81 +40,83 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          {/* AUTH ROUTES */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/mailSent" element={<Mailsent />} />
+    <UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            {/* AUTH ROUTES */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/mailSent" element={<Mailsent />} />
 
-          <Route path="/terms" element={<Terms />} />
+            <Route path="/terms" element={<Terms />} />
 
-          {/* GENERAL PAGES ROUTE */}
-          <Route element={<Applayout />}>
-            <Route index element={<Navigate replace to="/home" />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/exercise/1" element={<VideoView />} />{" "}
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/audio" element={<Audio />} />
-          </Route>
-          {/* <Route path="/blog/:id" element={<BlogComponent/>} /> */}
-          <Route path="/blog/1" element={<BlogComponent />} />
-          <Route path="/podcast/1" element={<Subscribe />} />
+            {/* GENERAL PAGES ROUTE */}
+            <Route element={<Applayout />}>
+              <Route index element={<Navigate replace to="/home" />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/exercise/1" element={<VideoView />} />{" "}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/audio" element={<Audio />} />
+            </Route>
+            {/* <Route path="/blog/:id" element={<BlogComponent/>} /> */}
+            <Route path="/blog/1" element={<BlogComponent />} />
+            <Route path="/podcast/1" element={<Subscribe />} />
 
-          {/* DISCOVER PAGE ROUTE */}
-          <Route element={<Discover />}>
-            {/* <Route index element={<Navigate replace to="/discover" />} /> */}
-            <Route path="/discover/articles" element={<Articles />} />
-            <Route path="/discover/videos" element={<VideoResults />} />
-            <Route path="/discover/audio" element={<AudioResults />} />
-          </Route>
+            {/* DISCOVER PAGE ROUTE */}
+            <Route element={<Discover />}>
+              {/* <Route index element={<Navigate replace to="/discover" />} /> */}
+              <Route path="/discover/articles" element={<Articles />} />
+              <Route path="/discover/videos" element={<VideoResults />} />
+              <Route path="/discover/audio" element={<AudioResults />} />
+            </Route>
 
-          <Route element={<Menu />}>
-            {/* <Route path="/profile" element={<Profile />} /> */}
-            <Route path="/videos" element={<Videos />} />
-            <Route path="/therapybot" element={<TherapyBot />} />
-          </Route>
+            <Route element={<Menu />}>
+              <Route path="/account" element={<Profile />} />
+              <Route path="/videos" element={<Videos />} />
+              <Route path="/therapybot" element={<TherapyBot />} />
+            </Route>
 
-          <Route>
-            <Route index element={<Navigate replace to="/seatch" />} />
-            <Route path="/seatch" element={<Seatch />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/form" element={<Intake />} />
-            <Route path="/contactus" element={<Contactus />} />
-          </Route>
+            <Route>
+              {/* <Route index element={<Navigate replace to="/seatch" />} /> */}
+              <Route path="/seatch" element={<Seatch />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/form" element={<Intake />} />
+              <Route path="/contactus" element={<Contactus />} />
+            </Route>
 
-          {/* ACCOUNT PROFILE ROUTES */}
-          <Route element={<Account />}>
-            <Route index element={<Navigate replace to={"/profile"} />} />
-            <Route path="/profile" element={<AccountContent />} />
-            <Route path="/profile/push" element={<Push />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* ACCOUNT PROFILE ROUTES */}
+            <Route element={<Account />}>
+              <Route index element={<Navigate replace to={"/profile"} />} />
+              <Route path="/profile" element={<AccountContent />} />
+              <Route path="/profile/push" element={<Push />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
 
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 3000,
-          },
-          style: {
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-            backgroundColor: "#323232",
-            color: "white",
-          },
-        }}
-      />
-    </QueryClientProvider>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 3000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "#323232",
+              color: "white",
+            },
+          }}
+        />
+      </QueryClientProvider>
+    </UserProvider>
   );
 }
 

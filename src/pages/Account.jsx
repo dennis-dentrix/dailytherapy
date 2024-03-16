@@ -32,13 +32,14 @@ export function Account() {
 }
 
 function AccountMenu() {
+  const currentEmail = localStorage.getItem("email");
   return (
     <aside className=" bg-white p-4 md:p-8">
       <div className="flex flex-col gap-4 items-center space-x-2 mb-6">
         <Avatar style={{ fontSize: 30 }} />
-        <span className="text-xl font-medium">denkyusya@gmail.com</span>
+        <span className="text-xl font-medium">{currentEmail}</span>
       </div>
-      <nav className="space-y-2 md:border py-4 px-3 flex flex-col *:py-3 *:px-2 *:gap-2 *:text-xl md:text-base ">
+      <nav className="space-y-2 md:border py-4 px-3 flex flex-col *:py-3 *:px-2 *:gap-2 *:text-lg md:text-base ">
         <Link
           to="profile"
           className="flex items-center space-x-2 text-gray-700"
