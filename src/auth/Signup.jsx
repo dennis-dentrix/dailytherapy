@@ -1,7 +1,9 @@
-import { Checkbox } from "antd";
+import { Checkbox, Spin } from "antd";
 import MenuHeader from "../ui/MenuHeader";
 import { useState } from "react";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
+import { useForm } from "react-hook-form";
+import { useSignUp } from "../hooks/useSignUp";
 
 export default function Signup() {
   return (
@@ -14,13 +16,16 @@ export default function Signup() {
 
 export function SignupForm() {
   const [showPswd, setShowPswd] = useState(false);
-  const createUser = (e) => {
-    e.preventDefault();
-    fetch("https://barber-ro3k.onrender.com/api/v1/user/signup")
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
-  };
+  const { register, reset, handleSubmit } = useForm();
+  const { signUpAPI, isLoading } = useSignUp();
+
+  function onSubmitForm(data) {
+    signUpAPI(data, {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  }
 
   const handleToggle = (e) => {
     e.preventDefault();
@@ -29,7 +34,10 @@ export function SignupForm() {
   return (
     <div className="flex flex-col items-center justify-center p-6">
       <h1 className="text-4xl font-bold mb-8">Sign up</h1>
-      <form className="w-full max-w-xs space-y-6">
+      <form
+        className="w-full max-w-xs space-y-6"
+        onSubmit={handleSubmit(onSubmitForm)}
+      >
         <div>
           <label
             className="block text-sm font-medium text-gray-700"
@@ -42,6 +50,7 @@ export function SignupForm() {
             id="email"
             placeholder="Email"
             type="email"
+            {...register("email", { required: ["This field is required"] })}
           />
         </div>
         <div>
@@ -56,6 +65,9 @@ export function SignupForm() {
               className="mt-1 block w-full border-none focus:outline-none px-1 py-2  "
               placeholder="Password"
               type={showPswd ? "text" : "password"}
+              {...register("password", {
+                required: ["This field is required"],
+              })}
             />
             <button onClick={handleToggle}>
               {showPswd ? <EyeSlash /> : <Eye />}
@@ -64,9 +76,9 @@ export function SignupForm() {
         </div>
         <button
           className="w-full uppercase bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full"
-          onClick={createUser}
+          type="submit"
         >
-          Register
+          {isLoading ? <Spin /> : "Register"}
         </button>
         <div className="mt-6 flex items-center justify-center text-sm">
           <Checkbox id="terms" />
