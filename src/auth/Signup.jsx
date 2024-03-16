@@ -21,7 +21,9 @@ export function SignupForm() {
 
   function onSubmitForm(data) {
     signUpAPI(data, {
-      onSuccess: () => {
+      onSuccess: ({ data }) => {
+        console.log(data.user);
+
         reset();
       },
     });

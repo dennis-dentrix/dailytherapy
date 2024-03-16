@@ -13,7 +13,8 @@ export function useSignUp() {
   } = useMutation({
     mutationFn: signUp,
     onSuccess: (data) => {
-      console.log(data);
+      //   console.log(data);
+      console.log(`DATA---- ${{ ...data }}`);
       toast.success("Account created successfully");
     },
     onError: (err) => {
