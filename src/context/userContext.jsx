@@ -19,6 +19,15 @@ function reducer(state, action) {
         ...state,
         user: action.payload.user,
         token: action.payload.token,
+        isAuthenticated: true,
+      };
+
+    case "login":
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token,
+        isAuthenticated: true,
       };
 
     case "update":

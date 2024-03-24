@@ -27,6 +27,7 @@ export function SignupForm() {
   function onSubmitForm(data) {
     signUpAPI(data, {
       onSuccess: ({ data }) => {
+        dispatch({ type: "signup", payload: data.user });
         console.log(data.user);
 
         reset();

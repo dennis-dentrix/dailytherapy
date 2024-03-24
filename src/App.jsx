@@ -73,7 +73,7 @@ function App() {
             </Route>
 
             <Route element={<Menu />}>
-              <Route path="/account" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/videos" element={<Videos />} />
               <Route path="/therapybot" element={<TherapyBot />} />
             </Route>
@@ -88,9 +88,9 @@ function App() {
 
             {/* ACCOUNT PROFILE ROUTES */}
             <Route element={<Account />}>
-              <Route index element={<Navigate replace to={"/profile"} />} />
-              <Route path="/profile" element={<AccountContent />} />
-              <Route path="/profile/push" element={<Push />} />
+              <Route index element={<Navigate replace to={"/account"} />} />
+              <Route path="/account" element={<AccountContent />} />
+              <Route path="/account/push" element={<Push />} />
             </Route>
           </Routes>
         </BrowserRouter>

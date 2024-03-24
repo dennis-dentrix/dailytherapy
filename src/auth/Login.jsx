@@ -2,7 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import MenuHeader from "../ui/MenuHeader";
 import { useForm } from "react-hook-form";
 import { UseLogin } from "../hooks/useLogin";
-import { Spin } from "antd";
+import { Checkbox, Spin } from "antd";
+import { useAppState } from "../context/userContext";
+import { useState } from "react";
 
 export default function Login() {
   return (
@@ -14,13 +16,24 @@ export default function Login() {
 }
 
 export function LoginForm() {
+  const [checked, setChecked] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const { loginApi, isLoading } = UseLogin();
   const navigate = useNavigate();
+  const { dispatch } = useAppState();
+
+  function handleChecked() {
+    setChecked(!checked);
+  }
 
   const onLogin = (data) => {
+    console.log(data);
     loginApi(data, {
       onSuccess: () => {
+        dispatch({
+          type: "login",
+          payload: { user: data.data.user, token: data.token },
+        });
         localStorage.setItem("email", data.email);
         reset();
         navigate("/profile");
@@ -65,6 +78,7 @@ export function LoginForm() {
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full"
+            disabled={checked ? true : false}
           >
             {isLoading ? <Spin /> : " LOG IN"}
           </button>
@@ -89,23 +103,23 @@ export function LoginForm() {
             <Link
               to="/signup"
               className="text-black text-lg hover:text-blue-700 underline"
-              href="#"
             >
               Sign up
             </Link>
           </p>
         </div>
 
-        <div>
+        <div className="flex items-start gap-2">
+          <input
+            type="checkbox"
+            name="checkbox"
+            id=""
+            onClick={handleChecked}
+          />
           <p className="text-xs">
             By using this application you agree to the{" "}
-            <a href="#" className="underline">
-              Terms of use
-            </a>{" "}
-            and{" "}
-            <a href="#" className="underline">
-              Privacy policy
-            </a>
+            <a className="underline">Terms of use</a> and{" "}
+            <a className="underline">Privacy policy</a>
           </p>
         </div>
       </div>

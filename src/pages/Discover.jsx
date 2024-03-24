@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
 import Navbar from "../ui/Navbar";
+import { SearchResult } from "./../components/SearchResults";
 
 export default function Discover() {
   return (
@@ -16,9 +17,9 @@ export default function Discover() {
         />
       </div>
       <Navbar />
-      <Navigation />
+      {/* <Navigation /> */}
       <Outlet />
-      {/* <SearchResult /> */}
+      <SearchResult />
       {/* <SearchBody /> */}
     </main>
   );

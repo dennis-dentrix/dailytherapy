@@ -15,6 +15,7 @@ import {
 import { Link, Outlet } from "react-router-dom";
 import MenuHeader from "../ui/MenuHeader";
 import AppSettings from "../components/AppSettings";
+import { useAppState } from "../context/userContext";
 
 export function Account() {
   return (
@@ -32,12 +33,12 @@ export function Account() {
 }
 
 function AccountMenu() {
-  const currentEmail = localStorage.getItem("email");
+  const { user } = useAppState();
   return (
     <aside className=" bg-white p-4 md:p-8">
       <div className="flex flex-col gap-4 items-center space-x-2 mb-6">
         <Avatar style={{ fontSize: 30 }} />
-        <span className="text-xl font-medium">{currentEmail}</span>
+        <span className="text-xl font-medium">{user.email}</span>
       </div>
       <nav className="space-y-2 md:border py-4 px-3 flex flex-col *:py-3 *:px-2 *:gap-2 *:text-lg md:text-base ">
         <Link
